@@ -10,7 +10,7 @@ public class TestYahtzee
 		boolean erreur = false;
 		int deConserve = 0;
 		boolean partieEnCours = true;
-		boolean bPlacement;
+		boolean bPlacement = false;
 
 		while (partieEnCours)
 		{
@@ -45,19 +45,19 @@ public class TestYahtzee
 					erreur = false;
 					do
 					{
-						System.out.println("Dans quelle case ?");
+						System.out.println("Dans quelle case ? ([R]etour)");
 						placement = Clavier.lireString();
+						if (placement.equals("R")) break;
 						try
 						{
 							Integer.parseInt(placement);
 							erreur = false;
 						} catch (Exception e) {erreur = true;}
-						bPlacement = y.placer(Integer.parseInt(placement));
-						System.out.println("bplacement = " + bPlacement);
+						if (!erreur) bPlacement = y.placer(Integer.parseInt(placement));
 
 						if (!bPlacement) System.out.println("Vous ne pouvez pas.");
-					} while (erreur || !bPlacement);
-					y.lancer();
+					} while (erreur || !bPlacement || placement.equals("R"));
+					if (!placement.equals("R")) y.lancer();
 				}
 				case 'Q' -> partieEnCours = false;
 				default -> System.out.println("Erreur : Mauvaise commande");
