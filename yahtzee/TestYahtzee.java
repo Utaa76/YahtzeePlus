@@ -53,10 +53,8 @@ public class TestYahtzee
 							Integer.parseInt(placement);
 							erreur = false;
 						} catch (Exception e) {erreur = true;}
-						if (!erreur) bPlacement = y.placer(Integer.parseInt(placement));
 
-						if (!bPlacement) System.out.println("Vous ne pouvez pas.");
-					} while (erreur || !bPlacement || placement.equals("R"));
+					} while (!y.placer(Integer.parseInt(placement)) || placement.equals("R"));
 					if (!placement.equals("R")) y.lancer();
 				}
 				case 'Q' -> partieEnCours = false;

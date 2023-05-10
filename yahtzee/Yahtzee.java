@@ -63,7 +63,7 @@ public class Yahtzee
 	public boolean placer(int indice)
 	{
 
-		if (this.fiche[indice][3] != " " || indice < 1 || indice > 21) return false;
+		if (indice < 1 || indice > 21) return false;
 		
 		int total = 0;
 		switch (indice)
@@ -76,6 +76,8 @@ public class Yahtzee
 			case 6 -> total = this.calculUnite(6);
 			case 7, 8, 9, 10, 11, 12, 13, 14->
 			{
+				if (this.fiche[indice+1][3] != " ") return false;
+
 				if (this.verifierCondition(indice+1))
 					total = this.totalDes();
 				else
@@ -83,6 +85,8 @@ public class Yahtzee
 			}
 			case 15 ->
 			{
+				if (this.fiche[indice+1][3] != " ") return false;
+
 				if (this.verifierCondition(indice+1))
 					total = Integer.parseInt(this.fiche[indice+1][2]);
 				else
@@ -90,6 +94,8 @@ public class Yahtzee
 			}
 			case 16, 17 ->
 			{
+				if (this.fiche[indice+3][3] != " ") return false;
+
 				if (this.verifierCondition(indice+3))
 					total = Integer.parseInt(this.fiche[indice+3][2]);
 				else
@@ -97,6 +103,8 @@ public class Yahtzee
 			}
 			default ->
 			{
+				if (this.fiche[indice+5][3] != " ") return false;
+
 				if (this.verifierCondition(indice+5))
 					total = Integer.parseInt(this.fiche[indice+5][2]);
 				else
