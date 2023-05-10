@@ -294,7 +294,7 @@ public class Yahtzee
 			case 20 -> // Grande suite
 			{
 				int[] tab = this.nbSimilaire();
-				bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 0 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 0 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
+				bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
 			}
 
 			case 21 -> // Prime 2eme Gde suite
@@ -302,7 +302,7 @@ public class Yahtzee
 				if (this.fiche[20][3] !=  " ")
 				{
 					int[] tab = this.nbSimilaire();
-					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 0 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 0 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
+					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
 				}
 			}
 
@@ -311,7 +311,7 @@ public class Yahtzee
 				if (this.nbLancers < 2)
 				{
 					int[] tab = this.nbSimilaire();
-					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 0 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 0 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
+					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
 				}
 			}
 
