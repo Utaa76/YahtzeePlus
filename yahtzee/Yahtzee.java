@@ -410,6 +410,8 @@ public class Yahtzee
 		return max;
 	}
 
+	public String[][] getTableau() {return this.fiche;}
+
 	public String toString()
 	{
 		String sRet = "";
