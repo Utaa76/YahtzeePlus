@@ -62,7 +62,7 @@ public class Yahtzee
 
 	public boolean placer(int indice)
 	{
-
+		if (this.fiche[indice+1][3] != " " && indice >= 1 && indice <= 6) return false;
 		if (indice < 1 || indice > 21) return false;
 		
 		int total = 0;
