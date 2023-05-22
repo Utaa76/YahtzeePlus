@@ -62,7 +62,7 @@ public class Yahtzee
 
 	public boolean placer(int indice)
 	{
-		if (this.fiche[indice+1][3] != " " && indice >= 1 && indice <= 6) return false;
+		if (this.fiche[indice][3] != " " && indice >= 1 && indice <= 6) return false;
 		if (indice < 1 || indice > 21) return false;
 		
 		int total = 0;
@@ -112,12 +112,14 @@ public class Yahtzee
 			}
 		}
 
-		this.appliquerPrime();
-
-		this.nbLancers = 0;
 		for (De de : this.ensDe)
 			de.setConserver(false);
-
+		
+		this.appliquerPrime();
+		
+		this.nbLancers = 0;
+		this.lancer();
+		
 		if (indice <= 6)
 			this.fiche[indice]  [3] = "" + total;
 		
@@ -129,6 +131,9 @@ public class Yahtzee
 
 		if (indice >= 18)
 			this.fiche[indice+5][3] = "" + total;
+
+		if (this.verifierCondition(7))
+			this.fiche[7][3] = this.fiche[7][2];
 
 		return true;
 	}
@@ -177,7 +182,7 @@ public class Yahtzee
 		switch (lig)
 		{
 			// Prime 63pts
-			case 6 ->
+			case 7 ->
 			{
 				int total = 0;
 				for (int i = 0 ; i < 6 ; i++)
@@ -188,7 +193,7 @@ public class Yahtzee
 					}
 					catch (Exception e) {}
 				}
-
+				System.out.println("total = " + total);
 				bRet = total >= 63;
 			}
 
@@ -216,7 +221,7 @@ public class Yahtzee
 					if (this.nbSimilaire()[i] >= 2 && i != num1) num2 = i;
 				}
 
-				bRet = num2 > 0 || this.nbSimilaire()[num1] >= 4;
+				bRet = num1 > 0 && num2 > 0 || this.nbSimilaire()[num1] >= 4;
 			}
 
 			case 12 -> // Minimum
@@ -372,13 +377,10 @@ public class Yahtzee
 
 	private void appliquerPrime()
 	{
-		for (int lig = 0 ; lig < this.fiche.length ; lig++)
+		for (int lig = this.fiche.length - 1 ; lig >= 0 ; lig--)
 			if (this.fiche[lig][1].length() > 5 && this.fiche[lig][1].substring(0,5).equals("Prime"))
 				if (this.verifierCondition(lig))
-					if (lig <= 14)
-						this.fiche[lig][3] = "" + this.totalDes();
-					else
-						this.fiche[lig][3] = this.fiche[lig][2];
+					this.fiche[lig][3] = this.fiche[lig][2];
 	}
 
 	private int[] nbSimilaire()
@@ -410,7 +412,24 @@ public class Yahtzee
 		return max;
 	}
 
-	public String[][] getTableau() {return this.fiche;}
+	public String[][] getTableau     ()      {return this.fiche;        }
+
+	public int        getNbLancer    ()      {return this.nbLancers;    }
+
+	public De[]       getTabDes      ()      {return this.ensDe;        }
+
+	public String     getTitreAnnonce(int i) {return this.fiche[i+1][1];}
+
+	public int        getScoreAnnonce(int i)
+	{
+		try
+		{
+			return Integer.parseInt(this.fiche[i+1][3]);
+		}
+		catch (Exception e) {}
+
+		return -1;
+	}
 
 	public String toString()
 	{

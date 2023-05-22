@@ -1,26 +1,38 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Toolkit;
+
 import javax.swing.*;
 
 public class FramePrincipale extends JFrame
 {
-	private PanelPrincipale panelP;
-	private Controleur      ctrl;
+	private PanelDes   panelD;
+	private PanelFiche panelF;
+	private Controleur ctrl;
 
 	public FramePrincipale(Controleur ctrl)
 	{
 		this.ctrl   = ctrl;
-		this.setSize(1200, 800);
+		this.setSize(700, 850);
+
+		this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
 		this.setName("YahtzeePlus");
+		this.setLayout(new BorderLayout());
 
-		this.panelP = new PanelPrincipale(ctrl);
+		this.panelD = new PanelDes  (ctrl);
+		this.panelF = new PanelFiche(ctrl);
 
-		this.add(panelP);
+		this.add(this.panelD, BorderLayout.NORTH);
+		this.add(this.panelF, BorderLayout.CENTER);
 
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.pack();
 	}
 
-	public String getImage(De de)
+	public void majIHM()
 	{
-		return this.ctrl.getImage(de);
+		this.panelD.majIHM();
+		this.panelF.majIHM();
 	}
 }
