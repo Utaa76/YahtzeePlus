@@ -54,15 +54,32 @@ public class Controleur
 		this.vue.dispose();
 	}
 
-	public void placer(int indice)
+	public boolean placer(int indice)
 	{
+		boolean bRet = false;
 		switch (indice)
 		{
-			case 0, 1, 2, 3, 4, 5                -> this.metier.placer(indice+1);
-			case 7, 8, 9, 10, 11, 12, 13, 14, 15 -> this.metier.placer(indice);
-			case 18, 19                          -> this.metier.placer(indice-2);
-			case 22, 23, 24, 25                  -> this.metier.placer(indice-4);
+			case 0, 1, 2, 3, 4, 5                -> bRet = this.metier.placer(indice+1);
+			case 7, 8, 9, 10, 11, 12, 13, 14, 15 -> bRet = this.metier.placer(indice);
+			case 18, 19                          -> bRet = this.metier.placer(indice-2);
+			case 22, 23, 24, 25                  -> bRet = this.metier.placer(indice-4);
 		}
+
+		return bRet;
+	}
+
+	public int getScoreSelonAnnonce(int indice)
+	{
+		int total = 0;
+		switch (indice)
+		{
+			case 0, 1, 2, 3, 4, 5                -> total = this.metier.getScoreSelonAnnonce(indice+1);
+			case 7, 8, 9, 10, 11, 12, 13, 14, 15 -> total = this.metier.getScoreSelonAnnonce(indice);
+			case 18, 19                          -> total = this.metier.getScoreSelonAnnonce(indice-2);
+			case 22, 23, 24, 25                  -> total = this.metier.getScoreSelonAnnonce(indice-4);
+		}
+
+		return total;
 	}
 
 	public void majIHM()
@@ -82,7 +99,7 @@ public class Controleur
  * 	Gestion de fin de partie en IHM
  * 	Score total
  * 	Description de l'annonce quand on passe sur son titre
- * 	Mode pointage du curseur sur les scores
- * 	Affichage des scores possibles dans chaque ligne de score (tous comme sur jeugratuit.com ou quand on passe la souris)
  * 	Statistiques (nb parties jouées, score maximal, etc) (annonce lorsqu'on inscrit un nouveau score max ?)
+ * 	Mettre le Full avec ses primes
+ * 	Pour le score final &  la description -> faire un nouveau Panel perso qui aura d'un coté le score total (fond 158, 217, 255) et de l'autre la description des annonces
  */

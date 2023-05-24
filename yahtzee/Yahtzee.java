@@ -39,7 +39,7 @@ public class Yahtzee
 	                             {" " , "Prime 2eme Yahtzee",          "100",           " "             },
 	                             {" " , "Prime 3eme Yahtzee",          "150",           " "             },
 	                             {" " , "Prime Yahtzee 1er Coup",      "75",            " "             },
-	                             {" " , "Prime Yahtzee 2eme Coup",     "50",            " "             } };
+	                             {" " , "Prime Yahtzee 2eme Coup",     "50",            " "             }, };
 
 	public Yahtzee()
 	{
@@ -138,6 +138,58 @@ public class Yahtzee
 		return true;
 	}
 
+	public int getScoreSelonAnnonce(int indice)
+	{
+		int total = 0;
+		switch (indice)
+		{
+			case 1 -> total = this.calculUnite(1);
+			case 2 -> total = this.calculUnite(2);
+			case 3 -> total = this.calculUnite(3);
+			case 4 -> total = this.calculUnite(4);
+			case 5 -> total = this.calculUnite(5);
+			case 6 -> total = this.calculUnite(6);
+			case 7, 8, 9, 10, 11, 12, 13, 14->
+			{
+				if (this.fiche[indice+1][3] != " ") return -1;
+
+				if (this.verifierCondition(indice+1))
+					total = this.totalDes();
+				else
+					total = 0;
+			}
+			case 15 ->
+			{
+				if (this.fiche[indice+1][3] != " ") return -1;
+
+				if (this.verifierCondition(indice+1))
+					total = Integer.parseInt(this.fiche[indice+1][2]);
+				else
+					total = 0;
+			}
+			case 16, 17 ->
+			{
+				if (this.fiche[indice+3][3] != " ") return -1;
+
+				if (this.verifierCondition(indice+3))
+					total = Integer.parseInt(this.fiche[indice+3][2]);
+				else
+					total = 0;
+			}
+			default ->
+			{
+				if (this.fiche[indice+5][3] != " ") return -1;
+
+				if (this.verifierCondition(indice+5))
+					total = Integer.parseInt(this.fiche[indice+5][2]);
+				else
+					total = 0;
+			}
+		}
+
+		return total;
+	}
+
 	private int calculUnite(int numero)
 	{
 		int total = 0;
@@ -193,7 +245,6 @@ public class Yahtzee
 					}
 					catch (Exception e) {}
 				}
-				System.out.println("total = " + total);
 				bRet = total >= 63;
 			}
 
@@ -221,7 +272,10 @@ public class Yahtzee
 					if (this.nbSimilaire()[i] >= 2 && i != num1) num2 = i;
 				}
 
-				bRet = num1 > 0 && num2 > 0 || this.nbSimilaire()[num1] >= 4;
+				if (num1 > -1 && num2 > -1)
+					bRet = num1 > -1 && num2 > -1 || this.nbSimilaire()[num1] >= 4;
+				else
+					bRet = false;
 			}
 
 			case 12 -> // Minimum
@@ -265,7 +319,7 @@ public class Yahtzee
 					if (this.nbSimilaire()[i] >= 2 && i != num1) num2 = i;
 				}
 
-				bRet = num2 > -1;
+				bRet = num2 > -1 && num1 > -1;
 			}
 
 			case 17 -> // Prime 2eme full
