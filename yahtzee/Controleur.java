@@ -1,5 +1,9 @@
+import java.awt.Color;
+
 public class Controleur
 {
+	public static final Color BLEU = new Color(20,50,150);
+
 	private Yahtzee         metier;
 	private FramePrincipale vue;
 
@@ -87,6 +91,26 @@ public class Controleur
 		this.vue.majIHM();
 	}
 
+	public boolean partieTerminee()
+	{
+		return this.metier.partieTerminee();
+	}
+
+	public int getScoreTotal()
+	{
+		return this.metier.calculScore();
+	}
+
+	public String getExplication(int indice)
+	{
+		return this.metier.getExplication(indice+1);
+	}
+
+	public void majExplication(String text)
+	{
+		this.vue.majExplication(text);
+	}
+
 	public static void main(String[] args)
 	{
 		System.out.println("(C) Yanis VERDIER");
@@ -97,9 +121,7 @@ public class Controleur
 /*
  * Chose à rajouter :
  * 	Gestion de fin de partie en IHM
- * 	Score total
- * 	Description de l'annonce quand on passe sur son titre
  * 	Statistiques (nb parties jouées, score maximal, etc) (annonce lorsqu'on inscrit un nouveau score max ?)
  * 	Mettre le Full avec ses primes
- * 	Pour le score final &  la description -> faire un nouveau Panel perso qui aura d'un coté le score total (fond 158, 217, 255) et de l'autre la description des annonces
+ * 	Faire un menu de démarrage (Bouton Commencer, Règles, etc)
  */

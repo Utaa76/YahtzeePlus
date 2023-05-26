@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class PanelFiche extends JPanel implements MouseListener
 {
-	private static final Color GRIS_CLAIR = new Color(230,230,230);
+	public static final Color GRIS_CLAIR = new Color(230,230,230);
 
 	private Controleur ctrl;
 	private JLabel[]   tabLblTitre;
@@ -22,9 +22,9 @@ public class PanelFiche extends JPanel implements MouseListener
 	{
 		this.ctrl = ctrl;
 
-		this.setLayout(new GridLayout(16, 2, 5, 2));
+		this.setLayout(new GridLayout(16, 2, 5, 3));
 		this.setOpaque(true);
-		this.setBackground(new Color(20,50,150));
+		this.setBackground(Controleur.BLEU);
 		
 		this.tabLblTitre = new JLabel[31];
 		this.tabLblScore = new JLabel[31];
@@ -59,6 +59,8 @@ public class PanelFiche extends JPanel implements MouseListener
 				Font texteGros   = texte.deriveFont(Font.BOLD, 14.0f);
 				lbl.setFont(texteGros);
 			}
+
+			lbl.addMouseListener(this);
 		}
 
 		for (JLabel lbl : this.tabLblScore)
@@ -108,6 +110,11 @@ public class PanelFiche extends JPanel implements MouseListener
 					this.tabLblScore[i].setForeground(Color.lightGray);
 				}
 			}
+		
+			if (e.getSource() == this.tabLblTitre[i])
+			{
+				this.ctrl.majExplication(this.ctrl.getExplication(i));
+			}
 		}
 	}
 	public void mouseExited   (MouseEvent e)
@@ -116,6 +123,11 @@ public class PanelFiche extends JPanel implements MouseListener
 		{
 			this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			this.majIHM();
+		}
+
+		if (Arrays.asList(this.tabLblTitre).contains((JLabel)e.getSource()))
+		{
+			this.ctrl.majExplication("Pointez une annonce pour avoir l'explication de celle-ci.");
 		}
 	}
 	public void mousePressed  (MouseEvent e){}

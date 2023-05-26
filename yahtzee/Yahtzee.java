@@ -8,38 +8,38 @@ public class Yahtzee
 {
 	private De[]       ensDe;
 	private int        nbLancers;
-	private String[][] fiche = { {""  , "Titre",                       "Valeur" ,       "Points obtenus"},
-	                             {"1" , "As",                          "Total des 1",   " "             },
-	                             {"2" , "Deux",                        "Total des 2",   " "             },
-	                             {"3" , "Trois",                       "Total des 3",   " "             },
-	                             {"4" , "Quatre",                      "Total des 4",   " "             },
-	                             {"5" , "Cinq",                        "Total des 5",   " "             },
-	                             {"6" , "Six",                         "Total des 6",   " "             },
-	                             {" " , "Prime - Scores Unitaires >63","35",            " "             },
-	                             {"7" , "Chance",                      "Total des dés", " "             },
-	                             {"8" , "Brelan",                      "Total des dés", " "             },
-	                             {"9" , "Carré",                       "Total des dés", " "             },
-	                             {"10", "2 paires",                    "Total des dés", " "             },
-	                             {"11", "Minimum",                     "Total des dés", " "             },
-	                             {"12", "Maximum",                     "Total des dés", " "             },
-	                             {"13", "Pair",                        "Total des dés", " "             },
-	                             {"14", "Impair",                      "Total des dés", " "             },
-	                             {"15", "Full",                        "25",            " "             },
-	                             {" " , "Prime 2ème full",             "10",            " "             },
-	                             {" " , "Prime full du 1er coup",      "20",            " "             },
-	                             {"16", "Petite suite",                "30",            " "             },
-	                             {"17", "Grande suite",                "40",            " "             },
-	                             {" " , "Prime 2ème Gde suite",        "10",            " "             },
-	                             {" " , "Prime Gde suite du 1er coup", "20",            " "             },
-	                             {"18", "Minor",                       "40",            " "             },
-	                             {"19", "Major",                       "30",            " "             },
-	                             {"20", "Twenty",                      "30",            " "             },
-	                             {"21", "Yahtzee",                     "50",            " "             },
-	                             {" " , "Prime Yahtzee de 6",          "10",            " "             },
-	                             {" " , "Prime 2eme Yahtzee",          "100",           " "             },
-	                             {" " , "Prime 3eme Yahtzee",          "150",           " "             },
-	                             {" " , "Prime Yahtzee 1er Coup",      "75",            " "             },
-	                             {" " , "Prime Yahtzee 2eme Coup",     "50",            " "             }, };
+	private String[][] fiche = { {""  , "Titre",                       "Valeur" ,       "Points obtenus", "Description"},
+	                             {"1" , "Un",                          "Total des 1",   " "             , "Total des dés dont le score est 1"},
+	                             {"2" , "Deux",                        "Total des 2",   " "             , "Total des dés dont le score est 2"},
+	                             {"3" , "Trois",                       "Total des 3",   " "             , "Total des dés dont le score est 3"},
+	                             {"4" , "Quatre",                      "Total des 4",   " "             , "Total des dés dont le score est 4"},
+	                             {"5" , "Cinq",                        "Total des 5",   " "             , "Total des dés dont le score est 5"},
+	                             {"6" , "Six",                         "Total des 6",   " "             , "Total des dés dont le score est 6"},
+	                             {" " , "Prime - Scores Unitaires >63","35",            " "             , "PRIME de 35 points bonus\nObtenue si la somme des scores unitaires est supérieure ou égale à 63\n(soit 3 dés identiques par unité)"},
+	                             {"7" , "Chance",                      "Total des dés", " "             , "Case bonus, aucune contraite"},
+	                             {"8" , "Brelan",                      "Total des dés", " "             , "Trois dés identiques"},
+	                             {"9" , "Carré",                       "Total des dés", " "             , "Quatre dés identiques"},
+	                             {"10", "2 paires",                    "Total des dés", " "             , "Deux fois deux dés identiques"},
+	                             {"11", "Minimum",                     "Total des dés", " "             , "Total des dés inférieur au maximum"},
+	                             {"12", "Maximum",                     "Total des dés", " "             , "Total des dés supérieur au minimum"},
+	                             {"13", "Pair",                        "Total des dés", " "             , "Chaque dé doit avoir un score pair"},
+	                             {"14", "Impair",                      "Total des dés", " "             , "Chaque dé doit avoir un score impair"},
+	                             {"15", "Full",                        "25",            " "             , "Trois dés identiques, les deux restants identiques entre eux"},
+	                             {" " , "Prime 2ème full",             "10",            " "             , "PRIME de 10 points\nObtenue si l'on place à nouveau un full dans la grille"},
+	                             {" " , "Prime full du 1er coup",      "20",            " "             , "PRIME de 20 points\nObtenue si l'on place un full obtenue dès le premier lancer"},
+	                             {"16", "Petite suite",                "30",            " "             , "Score de 4 dés se suivant\n(ex. : 1, 2 , 3, 4)"},
+	                             {"17", "Grande suite",                "40",            " "             , "Score des 5 dés se suivant\n(ex. : 1, 2, 3, 4, 5)"},
+	                             {" " , "Prime 2ème Gde suite",        "10",            " "             , "PRIME de 10 points\nObtenue si l'on place à nouveau une grande suite dans la grille"},
+	                             {" " , "Prime Gde suite du 1er coup", "20",            " "             , "PRIME de 20 points\nObtenue si l'on place une grande suite dès le premier lancer"},
+	                             {"18", "Minor",                       "40",            " "             , "Total des dés inférieur ou égal à 10"},
+	                             {"19", "Major",                       "30",            " "             , "Total des dés supérieur ou égal à 25"},
+	                             {"20", "Twenty",                      "30",            " "             , "Total des dés égal à 20"},
+	                             {"21", "Yahtzee",                     "50",            " "             , "Tous les dés identiques"},
+	                             {" " , "Prime Yahtzee de 6",          "10",            " "             , "PRIME de 10 points bonus\nObtenue si l'on place un Yahtzee avec des dés de 6"},
+	                             {" " , "Prime 2eme Yahtzee",          "100",           " "             , "PRIME de 100 points bonus\nObtenue si l'on place un deuxième Yahtzee"},
+	                             {" " , "Prime 3eme Yahtzee",          "150",           " "             , "PRIME de 150 points bonus\nObtenue si l'on place un troisième Yahtzee"},
+	                             {" " , "Prime Yahtzee 1er Coup",      "75",            " "             , "PRIME de 75 points bonus\nObtenue si l'on place un Yahtzee dès le premier lancer"},
+	                             {" " , "Prime Yahtzee 2eme Coup",     "50",            " "             , "PRIME de 50 points bonus\nObtenue si l'on place un Yahtzee dès le deuxième lancer"}, };
 
 	public Yahtzee()
 	{
@@ -273,7 +273,7 @@ public class Yahtzee
 				}
 
 				if (num1 > -1 && num2 > -1)
-					bRet = num1 > -1 && num2 > -1 || this.nbSimilaire()[num1] >= 4;
+					bRet = num1 > -1 && num2 > -1 || this.max(this.nbSimilaire()) >= 4;
 				else
 					bRet = false;
 			}
@@ -483,6 +483,20 @@ public class Yahtzee
 		catch (Exception e) {}
 
 		return -1;
+	}
+
+	public boolean partieTerminee()
+	{
+		for (int i = 1 ; i < this.fiche.length ; i++)
+			if (!this.fiche[i][1].startsWith("Prime") && this.fiche[i][3].equals(" "))
+				return false;
+
+		return true;
+	}
+
+	public String getExplication(int indice)
+	{
+		return this.fiche[indice][4];
 	}
 
 	public String toString()
