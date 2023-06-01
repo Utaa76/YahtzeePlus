@@ -1,16 +1,19 @@
 import java.awt.Color;
 
+import javax.swing.JFrame;
+
 public class Controleur
 {
 	public static final Color BLEU = new Color(20,50,150);
 
 	private Yahtzee         metier;
 	private FramePrincipale vue;
+	private FrameMenu       menu;
 
 	public Controleur()
 	{
+		this.menu   = new FrameMenu(this);
 		this.metier = new Yahtzee();
-		this.vue    = new FramePrincipale(this);
 	}
 
 	public String getImage(int i)
@@ -38,6 +41,11 @@ public class Controleur
 		this.metier.conserver(i+1);
 	}
 
+	public void fermerFenetreVue()
+	{
+		this.vue.dispose();
+	}
+
 	public void lancer()
 	{
 		this.metier.lancer();
@@ -53,9 +61,10 @@ public class Controleur
 		return this.metier.getScoreAnnonce(i);
 	}
 
-	public void fermerFenetre()
+	public void commencer()
 	{
-		this.vue.dispose();
+		this.vue = new FramePrincipale(this);
+		this.menu.dispose();
 	}
 
 	public boolean placer(int indice)
@@ -109,6 +118,13 @@ public class Controleur
 	public void majExplication(String text)
 	{
 		this.vue.majExplication(text);
+	}
+
+	public void reinitialiser()
+	{
+		this.vue.dispose();
+		this.metier = new Yahtzee();
+		this.vue = new FramePrincipale(this);
 	}
 
 	public static void main(String[] args)

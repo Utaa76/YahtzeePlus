@@ -10,6 +10,7 @@ import java.awt.event.*;
 public class PanelFin extends JPanel implements ActionListener
 {
 	private JButton    btnRejouer;
+	private JButton    btnMenu;
 	private Controleur ctrl;
 
 	public PanelFin(Controleur ctrl, Dimension dim)
@@ -25,6 +26,10 @@ public class PanelFin extends JPanel implements ActionListener
 		this.btnRejouer = new JButton("REJOUER");
 		this.btnRejouer.setPreferredSize(new Dimension(150,40));
 		this.btnRejouer.setFont(this.btnRejouer.getFont().deriveFont(Font.BOLD, 16.0f));
+		this.btnMenu    = new JButton("MENU");
+		this.btnMenu   .setPreferredSize(new Dimension(150,40));
+		this.btnMenu   .setFont(this.btnMenu   .getFont().deriveFont(Font.BOLD, 16.0f));
+
 
 		lblScore = new JLabel("PARTIE TERMINÉE", SwingConstants.CENTER);
 		lblScore.setForeground(Color.white);
@@ -33,19 +38,26 @@ public class PanelFin extends JPanel implements ActionListener
 		JPanel panelRejouer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		panelRejouer.setOpaque(true);
 		panelRejouer.setBackground(Controleur.BLEU);
+		panelRejouer.add(this.btnMenu);
 		panelRejouer.add(this.btnRejouer);
 
 		this.add(lblScore);
 		this.add(panelRejouer);
 
 		this.btnRejouer.addActionListener(this);
+		this.btnMenu   .addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource() == this.btnRejouer)
 		{
-			this.ctrl.fermerFenetre();
+			this.ctrl.reinitialiser();
+		}
+
+		if (e.getSource() == this.btnMenu)
+		{
+			this.ctrl.fermerFenetreVue();
 			new Controleur();
 		}
 	}

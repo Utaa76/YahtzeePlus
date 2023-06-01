@@ -16,7 +16,7 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 		this.tabDes    = new JLabel[5];
 		this.ctrl = ctrl;
 		this.btnLancer = new JButton("Lancer (" + this.ctrl.getNbLancerRestant() + ")");
-		this.btnRedem = new JButton("Redémarrer");
+		this.btnRedem = new JButton("   Menu   ");
 		this.setOpaque(true);
 		this.setBackground(new Color(20,50,150));
 		this.setLayout(new BorderLayout());
@@ -48,10 +48,11 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 			this.ctrl.lancer();
 
 		if (e.getSource() == this.btnRedem)
-			{
-				this.ctrl.fermerFenetre();
-				new Controleur();
-			}
+		{
+			//this.ctrl.reinitialiser();
+			this.ctrl.fermerFenetreVue();
+			new Controleur();
+		}
 			
 		this.majIHM();
 	}
