@@ -53,5 +53,10 @@ public class PanelMenu extends JPanel implements ActionListener
 		{
 			this.ctrl.commencer();
 		}
+
+		if (e.getSource() == this.ensBtn.get(2))
+		{
+			this.ctrl.getStats();
+		}
 	}
 }

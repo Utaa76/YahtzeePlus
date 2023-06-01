@@ -9,6 +9,7 @@ public class Controleur
 	private Yahtzee         metier;
 	private FramePrincipale vue;
 	private FrameMenu       menu;
+	private FrameStats      stats;
 
 	public Controleur()
 	{
@@ -125,6 +126,17 @@ public class Controleur
 		this.vue.dispose();
 		this.metier = new Yahtzee();
 		this.vue = new FramePrincipale(this);
+	}
+
+	public void getStats()
+	{
+		this.menu.dispose();
+		this.stats = new FrameStats(this);
+	}
+
+	public void fermerFenetreStats()
+	{
+		this.stats.dispose();
 	}
 
 	public static void main(String[] args)
