@@ -1,7 +1,7 @@
 // Retirer les numéros des lignes des primes ? (change bcp de choses pour les conditions)
 // Vérifier si la prime des +63pts marche tjrs
 
-import utilitaire.AffichageLigne;
+//import utilitaire.AffichageLigne;
 import java.util.*;
 
 public class Yahtzee
@@ -501,7 +501,7 @@ public class Yahtzee
 
 	public String toString()
 	{
-		String sRet = "";
+		String sRet = "VERSION CUI NON OPERATIONNELLE";
 
 		for (int lig = 0 ; lig < this.fiche.length ; lig++)
 		{
@@ -514,7 +514,7 @@ public class Yahtzee
 		sRet += "___|______________________________|_______________|_______________" + "\n" +
 		        "   | Total                        | " + String.format("%13s", this.calculScore()) + " |               \n";
 
-		sRet += "\n" + AffichageLigne.afficher(this.ensDe);
+		//sRet += "\n" + AffichageLigne.afficher(this.ensDe);
 
 		sRet += "Lancer n°" + this.nbLancers + "     |     Total des dés : " + this.totalDes() + "\n" +
 		        "__________________________________________________________________";
