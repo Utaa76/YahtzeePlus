@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.util.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.ObjectInputStream;
 
 import javax.swing.JFrame;
 
@@ -9,10 +10,11 @@ public class Controleur
 {
 	public static final Color BLEU = new Color(20,50,150);
 
-	private Yahtzee         metier;
-	private FramePrincipale vue;
-	private FrameMenu       menu;
-	private FrameStats      stats;
+	private Yahtzee          metier;
+	private FramePrincipale  vue;
+	private FrameMenu        menu;
+	private FrameStats       stats;
+	private FrameExplication explication;
 
 	public Controleur()
 	{
@@ -24,7 +26,7 @@ public class Controleur
 	{
 		De[] ensDe = this.metier.getTabDes();
 
-		String sRet = "./images/de" + ensDe[i].getNumero();
+		String sRet = "/images/de" + ensDe[i].getNumero();
 		if (ensDe[i].estConserver()) sRet += "_s";
 
 		return sRet + ".png";
@@ -82,7 +84,6 @@ public class Controleur
 			case 22, 23, 24, 25                      -> bRet = this.metier.placer(indice-4);
 		}
 
-		System.out.println(this.metier.toString());
 
 		return bRet;
 	}
@@ -139,9 +140,20 @@ public class Controleur
 		this.stats = new FrameStats(this);
 	}
 
+	public void getExplication()
+	{
+		this.menu.dispose();
+		this.explication = new FrameExplication(this);
+	}
+
 	public void fermerFenetreStats()
 	{
 		this.stats.dispose();
+	}
+
+	public void fermerFenetreExplication()
+	{
+		this.explication.dispose();
 	}
 
 	public int getBestScore()
@@ -172,7 +184,8 @@ public class Controleur
 
 		try
 		{
-			Scanner sc = new Scanner(new File("./stats.data"));
+			//Scanner sc = new Scanner(new File("./stats.data"));
+			Scanner sc = new Scanner(Controleur.class.getResourceAsStream("/stats.data"));
 
 			while (sc.hasNextLine())
 				ensLigne.add(sc.nextLine());
@@ -192,7 +205,7 @@ public class Controleur
 		{
 			// Lecture du fichier
 			ArrayList<String> ensLigne = new ArrayList<>();
-			Scanner sc = new Scanner(new File("./stats.data"));
+			Scanner sc = new Scanner(Controleur.class.getResourceAsStream("/stats.data"));
 
 			while (sc.hasNextLine())
 				ensLigne.add(sc.nextLine());

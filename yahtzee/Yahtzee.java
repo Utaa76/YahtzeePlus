@@ -62,7 +62,6 @@ public class Yahtzee
 
 	public boolean placer(int indice)
 	{
-		System.out.println("placer " + indice);
 		if (this.fiche[indice][3] != " " && indice >= 1 && indice <= 6) return false;
 		if (indice < 1 || indice > 21) return false;
 		
@@ -86,7 +85,6 @@ public class Yahtzee
 			}
 			case 15, 16 ->
 			{
-				System.out.println("case 15 16");
 				if (this.fiche[indice+1][3] != " ") return false;
 
 				if (this.verifierCondition(indice+1))
@@ -382,10 +380,8 @@ public class Yahtzee
 			{
 				if (this.nbLancers < 2)
 				{
-					System.out.println(this.nbLancers);
 					int[] tab = this.nbSimilaire();
 					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
-					System.out.println(bRet);
 				}
 			}
 
