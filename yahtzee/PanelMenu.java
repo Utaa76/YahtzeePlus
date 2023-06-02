@@ -56,7 +56,7 @@ public class PanelMenu extends JPanel implements ActionListener
 
 		if (e.getSource() == this.ensBtn.get(1))
 		{
-			this.ctrl.incrementerNbPartie();
+			this.ctrl.getExplication();
 		}
 
 		if (e.getSource() == this.ensBtn.get(2))

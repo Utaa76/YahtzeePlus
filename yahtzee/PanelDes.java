@@ -1,8 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class PanelDes extends JPanel implements MouseListener, ActionListener
 {
@@ -23,8 +25,10 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 
 
 		for (int i = 0 ; i < this.tabDes.length ; i++)
-			this.tabDes[i] = new JLabel(new ImageIcon(this.ctrl.getImage(i)));
-		
+			try
+			{
+				this.tabDes[i] = new JLabel(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream(this.ctrl.getImage(i)))/*this.ctrl.getImage(i)*/));
+			} catch (IOException ioe) {}
 		JPanel panelTmp = new JPanel();
 		panelTmp.setOpaque(false);
 		
@@ -76,8 +80,11 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 	public void majIHM()
 	{
 		for (int i = 0 ; i < this.tabDes.length ; i++)
-			this.tabDes[i].setIcon(new ImageIcon(this.ctrl.getImage(i)));
-
+			try
+			{
+				this.tabDes[i].setIcon(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream(this.ctrl.getImage(i)))));
+			} catch (IOException ioe) {}
+			
 		this.btnLancer.setText("Lancer (" + this.ctrl.getNbLancerRestant() + ")");
 	}
 }
