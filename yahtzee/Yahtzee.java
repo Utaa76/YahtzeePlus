@@ -24,16 +24,16 @@ public class Yahtzee
 	                             {"12", "Maximum",                     "Total des dés", " "             , "Total des dés supérieur au minimum"},
 	                             {"13", "Pair",                        "Total des dés", " "             , "Chaque dé doit avoir un score pair"},
 	                             {"14", "Impair",                      "Total des dés", " "             , "Chaque dé doit avoir un score impair"},
-	                             {"15", "Full",                        "25",            " "             , "Trois dés identiques, les deux restants identiques entre eux"},
+	                             {"15", "Twenty",                      "30",            " "             , "Total des dés égal à 20"},
+	                             {"16", "Full",                        "25",            " "             , "Trois dés identiques, les deux restants identiques entre eux"},
 	                             {" " , "Prime 2ème full",             "10",            " "             , "PRIME de 10 points\nObtenue si l'on place à nouveau un full dans la grille"},
 	                             {" " , "Prime full du 1er coup",      "20",            " "             , "PRIME de 20 points\nObtenue si l'on place un full obtenue dès le premier lancer"},
-	                             {"16", "Petite suite",                "30",            " "             , "Score de 4 dés se suivant\n(ex. : 1, 2 , 3, 4)"},
-	                             {"17", "Grande suite",                "40",            " "             , "Score des 5 dés se suivant\n(ex. : 1, 2, 3, 4, 5)"},
+	                             {"17", "Petite suite",                "30",            " "             , "Score de 4 dés se suivant\n(ex. : 1, 2 , 3, 4)"},
+	                             {"18", "Grande suite",                "40",            " "             , "Score des 5 dés se suivant\n(ex. : 1, 2, 3, 4, 5)"},
 	                             {" " , "Prime 2ème Gde suite",        "10",            " "             , "PRIME de 10 points\nObtenue si l'on place à nouveau une grande suite dans la grille"},
 	                             {" " , "Prime Gde suite du 1er coup", "20",            " "             , "PRIME de 20 points\nObtenue si l'on place une grande suite dès le premier lancer"},
-	                             {"18", "Minor",                       "40",            " "             , "Total des dés inférieur ou égal à 10"},
-	                             {"19", "Major",                       "30",            " "             , "Total des dés supérieur ou égal à 25"},
-	                             {"20", "Twenty",                      "30",            " "             , "Total des dés égal à 20"},
+	                             {"19", "Minor",                       "40",            " "             , "Total des dés inférieur ou égal à 10"},
+	                             {"20", "Major",                       "30",            " "             , "Total des dés supérieur ou égal à 25"},
 	                             {"21", "Yahtzee",                     "50",            " "             , "Tous les dés identiques"},
 	                             {" " , "Prime Yahtzee de 6",          "10",            " "             , "PRIME de 10 points bonus\nObtenue si l'on place un Yahtzee avec des dés de 6"},
 	                             {" " , "Prime 2eme Yahtzee",          "100",           " "             , "PRIME de 100 points bonus\nObtenue si l'on place un deuxième Yahtzee"},
@@ -62,6 +62,7 @@ public class Yahtzee
 
 	public boolean placer(int indice)
 	{
+		System.out.println("placer " + indice);
 		if (this.fiche[indice][3] != " " && indice >= 1 && indice <= 6) return false;
 		if (indice < 1 || indice > 21) return false;
 		
@@ -74,7 +75,7 @@ public class Yahtzee
 			case 4 -> total = this.calculUnite(4);
 			case 5 -> total = this.calculUnite(5);
 			case 6 -> total = this.calculUnite(6);
-			case 7, 8, 9, 10, 11, 12, 13, 14->
+			case 7, 8, 9, 10, 11, 12, 13, 14 ->
 			{
 				if (this.fiche[indice+1][3] != " ") return false;
 
@@ -83,8 +84,9 @@ public class Yahtzee
 				else
 					total = 0;
 			}
-			case 15 ->
+			case 15, 16 ->
 			{
+				System.out.println("case 15 16");
 				if (this.fiche[indice+1][3] != " ") return false;
 
 				if (this.verifierCondition(indice+1))
@@ -92,7 +94,7 @@ public class Yahtzee
 				else
 					total = 0;
 			}
-			case 16, 17 ->
+			case 17, 18 ->
 			{
 				if (this.fiche[indice+3][3] != " ") return false;
 
@@ -123,13 +125,13 @@ public class Yahtzee
 		if (indice <= 6)
 			this.fiche[indice]  [3] = "" + total;
 		
-		if (indice >  6 && indice <= 15)
+		if (indice >  6 && indice <= 16)
 			this.fiche[indice+1][3] = "" + total;
 		
-		if (indice > 15 && indice <= 17)
+		if (indice > 16 && indice <= 18)
 			this.fiche[indice+3][3] = "" + total;
 
-		if (indice >= 18)
+		if (indice >= 19)
 			this.fiche[indice+5][3] = "" + total;
 
 		if (this.verifierCondition(7))
@@ -149,7 +151,7 @@ public class Yahtzee
 			case 4 -> total = this.calculUnite(4);
 			case 5 -> total = this.calculUnite(5);
 			case 6 -> total = this.calculUnite(6);
-			case 7, 8, 9, 10, 11, 12, 13, 14->
+			case 7, 8, 9, 10, 11, 12, 13, 14 ->
 			{
 				if (this.fiche[indice+1][3] != " ") return -1;
 
@@ -158,7 +160,7 @@ public class Yahtzee
 				else
 					total = 0;
 			}
-			case 15 ->
+			case 15, 16 ->
 			{
 				if (this.fiche[indice+1][3] != " ") return -1;
 
@@ -167,7 +169,7 @@ public class Yahtzee
 				else
 					total = 0;
 			}
-			case 16, 17 ->
+			case 17, 18 ->
 			{
 				if (this.fiche[indice+3][3] != " ") return -1;
 
@@ -308,7 +310,10 @@ public class Yahtzee
 				bRet = true;
 			}
 
-			case 16 -> // Full
+			// Twenty
+			case 16 -> bRet = this.totalDes() == 20;
+			
+			case 17 -> // Full
 			{
 				int num1, num2;
 				num1 = num2 = -1;
@@ -322,12 +327,12 @@ public class Yahtzee
 				bRet = num2 > -1 && num1 > -1;
 			}
 
-			case 17 -> // Prime 2eme full
+			case 18 -> // Prime 2eme full
 			{
 				int num1, num2;
 				num1 = num2 = -1;
 
-				if (this.fiche[16][3] != " ")
+				if (this.fiche[17][3] != " ")
 					for (int i = 0 ; i < this.nbSimilaire().length ; i++ )
 					{
 						if (this.nbSimilaire()[i] >= 3 && i != num2) num1 = i; // 0 2 1 3 0 0
@@ -337,7 +342,7 @@ public class Yahtzee
 				bRet = num2 > -1 && num1 > -1;
 			}
 			
-			case 18 -> // Prime full du 1er coup
+			case 19 -> // Prime full du 1er coup
 			{
 				int num1, num2;
 				num1 = num2 = -1;
@@ -352,48 +357,47 @@ public class Yahtzee
 				bRet = num2 > -1 && num1 > -1;
 			}
 
-			case 19 -> // Petite suite
+			case 20 -> // Petite suite
 			{
 				int[] tab = this.nbSimilaire();
 				bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 0 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 0 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
 			}
 			
-			case 20 -> // Grande suite
+			case 21 -> // Grande suite
 			{
 				int[] tab = this.nbSimilaire();
 				bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
 			}
 
-			case 21 -> // Prime 2eme Gde suite
+			case 22 -> // Prime 2eme Gde suite
 			{
-				if (this.fiche[20][3] !=  " ")
+				if (this.fiche[21][3] !=  " ")
 				{
 					int[] tab = this.nbSimilaire();
 					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
 				}
 			}
 
-			case 22 -> // Prime Gde suite 1er coup
+			case 23 -> // Prime Gde suite 1er coup
 			{
 				if (this.nbLancers < 2)
 				{
+					System.out.println(this.nbLancers);
 					int[] tab = this.nbSimilaire();
 					bRet = (tab[0] >= 1 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 0) || (tab[0] >= 0 && tab[1] >= 1 && tab[2] >= 1 && tab[3] >= 1 && tab[4] >= 1 && tab[5] >= 1);
+					System.out.println(bRet);
 				}
 			}
 
-			case 23 -> // Minor
+			case 24 -> // Minor
 			{
 				bRet = this.totalDes() <= 10;
 			}
 
-			case 24 -> // Major
+			case 25 -> // Major
 			{
 				bRet = this.totalDes() >= 25;
 			}
-
-			// Twenty
-			case 25 -> bRet = this.totalDes() == 20;
 
 			case 26 -> // Yahtzee
 			{
@@ -432,7 +436,7 @@ public class Yahtzee
 	private void appliquerPrime()
 	{
 		for (int lig = this.fiche.length - 1 ; lig >= 0 ; lig--)
-			if (this.fiche[lig][1].length() > 5 && this.fiche[lig][1].substring(0,5).equals("Prime"))
+			if (this.fiche[lig][1].length() > 5 && this.fiche[lig][1].startsWith("Prime"))
 				if (this.verifierCondition(lig))
 					this.fiche[lig][3] = this.fiche[lig][2];
 	}

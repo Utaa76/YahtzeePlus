@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
 
 import javax.swing.JFrame;
 
@@ -73,11 +76,13 @@ public class Controleur
 		boolean bRet = false;
 		switch (indice)
 		{
-			case 0, 1, 2, 3, 4, 5                -> bRet = this.metier.placer(indice+1);
-			case 7, 8, 9, 10, 11, 12, 13, 14, 15 -> bRet = this.metier.placer(indice);
-			case 18, 19                          -> bRet = this.metier.placer(indice-2);
-			case 22, 23, 24, 25                  -> bRet = this.metier.placer(indice-4);
+			case 0, 1, 2, 3, 4, 5                    -> bRet = this.metier.placer(indice+1);
+			case 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 -> bRet = this.metier.placer(indice);
+			case 19, 20                              -> bRet = this.metier.placer(indice-2);
+			case 22, 23, 24, 25                      -> bRet = this.metier.placer(indice-4);
 		}
+
+		System.out.println(this.metier.toString());
 
 		return bRet;
 	}
@@ -87,10 +92,10 @@ public class Controleur
 		int total = 0;
 		switch (indice)
 		{
-			case 0, 1, 2, 3, 4, 5                -> total = this.metier.getScoreSelonAnnonce(indice+1);
-			case 7, 8, 9, 10, 11, 12, 13, 14, 15 -> total = this.metier.getScoreSelonAnnonce(indice);
-			case 18, 19                          -> total = this.metier.getScoreSelonAnnonce(indice-2);
-			case 22, 23, 24, 25                  -> total = this.metier.getScoreSelonAnnonce(indice-4);
+			case 0, 1, 2, 3, 4, 5                    -> total = this.metier.getScoreSelonAnnonce(indice+1);
+			case 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 -> total = this.metier.getScoreSelonAnnonce(indice);
+			case 19, 20                              -> total = this.metier.getScoreSelonAnnonce(indice-2);
+			case 22, 23, 24, 25                      -> total = this.metier.getScoreSelonAnnonce(indice-4);
 		}
 
 		return total;
@@ -137,6 +142,82 @@ public class Controleur
 	public void fermerFenetreStats()
 	{
 		this.stats.dispose();
+	}
+
+	public int getBestScore()
+	{
+		return Integer.parseInt(this.getStat(1, 1));
+	}
+
+	public void incrementerNbPartie()
+	{
+		this.remplacerStat(0, Integer.parseInt(this.getStat(0,1)) + 1);
+	}
+
+	public String getStat(int ligne, int mot)
+	{
+		try
+		{
+			String[] lig = this.getLigneStat(ligne).split("\t");
+			return lig[mot];
+		}
+		catch (Exception e) {}
+
+		return "";
+	}
+
+	public String getLigneStat(int indice)
+	{
+		ArrayList<String> ensLigne = new ArrayList<>();
+
+		try
+		{
+			Scanner sc = new Scanner(new File("./stats.data"));
+
+			while (sc.hasNextLine())
+				ensLigne.add(sc.nextLine());
+
+			if (indice < 0 || indice >= ensLigne.size()) return "";
+
+			sc.close();
+		}
+		catch (Exception e) {}
+
+		return ensLigne.get(indice);
+	}
+
+	public boolean remplacerStat(int indice, int nvVal)
+	{
+		try
+		{
+			// Lecture du fichier
+			ArrayList<String> ensLigne = new ArrayList<>();
+			Scanner sc = new Scanner(new File("./stats.data"));
+
+			while (sc.hasNextLine())
+				ensLigne.add(sc.nextLine());
+			
+			sc.close();
+
+			String ligne = getLigneStat(indice).replace(getStat(indice, 1), "" + nvVal);
+
+			// Ecriture dans le fichier
+			FileWriter writer = new FileWriter(new File("./stats.data"), false);
+
+			for (int i = 0 ; i < 2 ; i++)
+			{
+				if (i == indice)
+					writer.write(ligne + "\n");
+				else
+					writer.write(ensLigne.get(i) + "\n");
+			}
+
+			writer.close();
+			return true;
+		}
+		catch (Exception e) {}
+
+		return false;
 	}
 
 	public static void main(String[] args)

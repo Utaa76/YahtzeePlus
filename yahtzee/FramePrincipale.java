@@ -46,7 +46,16 @@ public class FramePrincipale extends JFrame
 			PanelFin panelFin = new PanelFin(ctrl, this.panelD.getSize());
 			this.remove(this.panelD);
 			this.add(panelFin, BorderLayout.NORTH);
+			this.ctrl.incrementerNbPartie();
+			this.panelB.majScore();
+
+			if (this.ctrl.getScoreTotal() > this.ctrl.getBestScore())
+			{
+				this.ctrl.remplacerStat(1, this.ctrl.getScoreTotal());
+				System.out.println("Nouveau record !");
+			}
 		}
+
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 
