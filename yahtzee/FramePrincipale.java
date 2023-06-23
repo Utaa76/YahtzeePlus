@@ -1,7 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.List;
 import java.awt.Panel;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -42,17 +45,33 @@ public class FramePrincipale extends JFrame
 			this.panelB.majScore();
 		}
 		else
-		{
-			PanelFin panelFin = new PanelFin(ctrl, this.panelD.getSize());
-			this.remove(this.panelD);
-			this.add(panelFin, BorderLayout.NORTH);
+		{			
 			this.ctrl.incrementerNbPartie();
+			this.panelD.majIHM();
+			this.panelF.majIHM();
 			this.panelB.majScore();
-
+			
 			if (this.ctrl.getScoreTotal() > this.ctrl.getBestScore())
 			{
 				this.ctrl.remplacerStat(1, this.ctrl.getScoreTotal());
 				System.out.println("Nouveau record !");
+			}
+
+			String[] options = {"Rejouer", "Menu"};
+			int choix = JOptionPane.showOptionDialog(null, "La partie est terminée", "Fin de partie", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+			
+			if (choix == JOptionPane.YES_OPTION)
+			{
+				this.ctrl.reinitialiser();
+			}
+			else if  (choix == JOptionPane.NO_OPTION)
+			{
+				this.dispose();
+				new Controleur();
+			}
+			else
+			{
+				this.dispose();
 			}
 		}
 
