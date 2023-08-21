@@ -44,7 +44,7 @@ public class Yahtzee
 	public Yahtzee()
 	{
 		this.ensDe = new De[5];
-		this.nbLancers = 1;
+		this.nbLancers = 0;
 		for (int i = 0 ; i < this.ensDe.length ; i++)
 			this.ensDe[i] = new De(i+1);
 	}
@@ -118,7 +118,6 @@ public class Yahtzee
 		this.appliquerPrime();
 		
 		this.nbLancers = 0;
-		this.lancer();
 		
 		if (indice <= 6)
 			this.fiche[indice]  [3] = "" + total;

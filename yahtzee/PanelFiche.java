@@ -141,13 +141,14 @@ public class PanelFiche extends JPanel implements MouseListener
 			{
 				this.ctrl.placer(i);
 				this.tabLblScore[i].setForeground(Color.black);
+				this.ctrl.initierDes();
 			}
 		}
 
 		/*for (String[] s : this.ctrl.getTableau())
 			System.out.println(Arrays.toString(s));*/
 			
-		this.ctrl.majIHM();
+		this.ctrl.majIHM(false);
 	}
 
 	public void majIHM()

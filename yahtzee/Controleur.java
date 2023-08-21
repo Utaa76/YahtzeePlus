@@ -26,10 +26,15 @@ public class Controleur
 	{
 		De[] ensDe = this.metier.getTabDes();
 
-		String sRet = "/images/de" + ensDe[i].getNumero();
+		String sRet = "./images/de" + ensDe[i].getNumero();
 		if (ensDe[i].estConserver()) sRet += "_s";
 
 		return sRet + ".png";
+	}
+
+	public void initierDes()
+	{
+		this.vue.initierDes();
 	}
 
 	public String[][] getTableau()
@@ -102,9 +107,9 @@ public class Controleur
 		return total;
 	}
 
-	public void majIHM()
+	public void majIHM(boolean lancerDes)
 	{
-		this.vue.majIHM();
+		this.vue.majIHM(lancerDes);
 	}
 
 	public boolean partieTerminee()

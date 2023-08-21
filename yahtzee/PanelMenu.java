@@ -17,6 +17,7 @@ public class PanelMenu extends JPanel implements ActionListener
 	{
 		this.ctrl = ctrl;
 		this.setLayout(new BorderLayout(30,30));
+		this.setBackground(Controleur.BLEU);
 
 		this.ensBtn = new ArrayList<>();
 
@@ -25,10 +26,11 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.ensBtn.add(new JButton("Statistiques"));
 
 		JPanel  panelTmp = new JPanel(new GridLayout(this.ensBtn.size(), 1, 0, 100));
+		panelTmp.setOpaque(false);
 
-		this.ensBtn.get(0).setBackground(Color.green);
-		this.ensBtn.get(1).setBackground(Color.orange);
-		this.ensBtn.get(2).setBackground(Color.red);
+		this.ensBtn.get(0).setBackground(new Color(158, 217, 255));
+		this.ensBtn.get(1).setBackground(Color.white);
+		this.ensBtn.get(2).setBackground(Color.lightGray);
 
 		for (JButton btn : this.ensBtn)
 		{
@@ -38,10 +40,19 @@ public class PanelMenu extends JPanel implements ActionListener
 			panelTmp.add(btn);
 		}
 
-		this.add(new JPanel(), BorderLayout.NORTH);
-		this.add(new JPanel(), BorderLayout.EAST);
-		this.add(new JPanel(), BorderLayout.WEST);
-		this.add(new JPanel(), BorderLayout.SOUTH);
+		JPanel[] panelVide = new JPanel[4];
+
+		for (int cpt = 0 ; cpt < 4 ; cpt++)
+		{
+			panelVide[cpt] = new JPanel();
+			panelVide[cpt].setBackground(Controleur.BLEU);
+			//panelVide.setOpaque(false);
+		}
+
+		this.add(panelVide[0], BorderLayout.NORTH);
+		this.add(panelVide[1], BorderLayout.EAST);
+		this.add(panelVide[2], BorderLayout.WEST);
+		this.add(panelVide[3], BorderLayout.SOUTH);
 
 
 		this.add(panelTmp, BorderLayout.CENTER);

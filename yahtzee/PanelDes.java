@@ -20,15 +20,12 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 		this.btnLancer = new JButton("Lancer (" + this.ctrl.getNbLancerRestant() + ")");
 		this.btnRedem = new JButton("   Menu   ");
 		this.setOpaque(true);
-		this.setBackground(new Color(20,50,150));
+		this.setBackground(Controleur.BLEU);
 		this.setLayout(new BorderLayout());
 
-
 		for (int i = 0 ; i < this.tabDes.length ; i++)
-			try
-			{
-				this.tabDes[i] = new JLabel(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream(this.ctrl.getImage(i)))/*this.ctrl.getImage(i)*/));
-			} catch (IOException ioe) {}
+			this.tabDes[i] = new JLabel(new ImageIcon("./images/de_vide.png"));
+
 		JPanel panelTmp = new JPanel();
 		panelTmp.setOpaque(false);
 		
@@ -46,6 +43,12 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 		this.btnRedem .addActionListener(this);
 	}
 
+	public void initierDes()
+	{
+		for (int i = 0 ; i < this.tabDes.length ; i++)
+			this.tabDes[i].setIcon(new ImageIcon("./images/de_vide.png"));
+	}
+
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource() == this.btnLancer)
@@ -58,7 +61,7 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 			new Controleur();
 		}
 			
-		this.majIHM();
+		this.majIHM(true);
 	}
 	
 	public void mouseClicked(MouseEvent e)
@@ -69,7 +72,7 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 				this.ctrl.conserver(i);
 		}
 
-		this.majIHM();
+		this.majIHM(true);
 	}
 
 	public void mouseEntered  (MouseEvent e){}
@@ -77,14 +80,15 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 	public void mousePressed  (MouseEvent e){}
 	public void mouseReleased (MouseEvent e){}
 
-	public void majIHM()
+	public void majIHM(boolean lancerDes)
 	{
-		for (int i = 0 ; i < this.tabDes.length ; i++)
-			try
-			{
-				this.tabDes[i].setIcon(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream(this.ctrl.getImage(i)))));
-			} catch (IOException ioe) {}
-			
+		if (lancerDes)
+			for (int i = 0 ; i < this.tabDes.length ; i++)
+				try
+				{
+					this.tabDes[i].setIcon(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream(this.ctrl.getImage(i)))));
+				} catch (IOException ioe) {}
+		
 		this.btnLancer.setText("Lancer (" + this.ctrl.getNbLancerRestant() + ")");
 	}
 }

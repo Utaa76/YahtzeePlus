@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.List;
 import java.awt.Panel;
 import java.awt.Toolkit;
@@ -36,18 +35,18 @@ public class FramePrincipale extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void majIHM()
+	public void majIHM(boolean lancerDes)
 	{
 		if (!this.ctrl.partieTerminee())
 		{
-			this.panelD.majIHM();
+			this.panelD.majIHM(lancerDes);
 			this.panelF.majIHM();
 			this.panelB.majScore();
 		}
 		else
 		{			
 			this.ctrl.incrementerNbPartie();
-			this.panelD.majIHM();
+			this.panelD.majIHM(lancerDes);
 			this.panelF.majIHM();
 			this.panelB.majScore();
 			
@@ -76,6 +75,11 @@ public class FramePrincipale extends JFrame
 		}
 
 		SwingUtilities.updateComponentTreeUI(this);
+	}
+
+	public void initierDes()
+	{
+		this.panelD.initierDes();
 	}
 
 	public void majExplication(String text)
