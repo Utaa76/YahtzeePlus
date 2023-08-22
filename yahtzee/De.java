@@ -10,12 +10,16 @@ public class De
 	{
 		this.id     = id;
 		this.numero = 0;
-		this.lancer();
 	}
 
 	public int getNumero()
 	{
 		return this.numero;
+	}
+
+	public void setNumero(int numero)
+	{
+		this.numero = numero;
 	}
 
 	public void lancer()

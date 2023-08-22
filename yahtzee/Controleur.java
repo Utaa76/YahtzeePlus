@@ -24,10 +24,8 @@ public class Controleur
 
 	public String getImage(int i)
 	{
-		De[] ensDe = this.metier.getTabDes();
-
-		String sRet = "./images/de" + ensDe[i].getNumero();
-		if (ensDe[i].estConserver()) sRet += "_s";
+		String sRet = "./images/de" + this.metier.getDe(i).getNumero();
+		if (this.metier.getDe(i).estConserver()) sRet += "_s";
 
 		return sRet + ".png";
 	}
@@ -35,6 +33,11 @@ public class Controleur
 	public void initierDes()
 	{
 		this.vue.initierDes();
+	}
+
+	public De getDe(int i)
+	{
+		return this.metier.getDe(i);
 	}
 
 	public String[][] getTableau()

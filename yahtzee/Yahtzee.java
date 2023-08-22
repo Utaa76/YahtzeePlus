@@ -134,6 +134,9 @@ public class Yahtzee
 		if (this.verifierCondition(7))
 			this.fiche[7][3] = this.fiche[7][2];
 
+		for (De de : this.ensDe)
+			de.setNumero(0);
+
 		return true;
 	}
 
@@ -441,7 +444,8 @@ public class Yahtzee
 		int[] ensSimilaire = {0, 0, 0, 0, 0, 0};
 		for (De de : this.ensDe)
 		{
-			ensSimilaire[de.getNumero()-1]++;
+			if (de.getNumero() > 0)
+				ensSimilaire[de.getNumero()-1]++;
 		}
 
 		return ensSimilaire;
@@ -470,6 +474,8 @@ public class Yahtzee
 	public int        getNbLancer    ()      {return this.nbLancers;    }
 
 	public De[]       getTabDes      ()      {return this.ensDe;        }
+
+	public De         getDe          (int i) {return this.ensDe[i];     }
 
 	public String     getTitreAnnonce(int i) {return this.fiche[i+1][1];}
 

@@ -13,6 +13,8 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 	private Controleur ctrl;
 	private JButton    btnRedem;
 
+	private int        animationCount;
+
 	public PanelDes(Controleur ctrl)
 	{
 		this.tabDes    = new JLabel[5];
@@ -52,7 +54,25 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource() == this.btnLancer)
-			this.ctrl.lancer();
+		{
+			this.animationCount = 0;
+			this.animationTimer.start();
+
+			Timer delayTimer = new Timer(800, new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					PanelDes.this.ctrl.lancer();
+					PanelDes.this.majIHM(true);
+				}
+			});
+
+			// this.ctrl.lancer();
+			// this.majIHM(true);
+
+			delayTimer.setRepeats(false);
+			delayTimer.start();
+		}
 
 		if (e.getSource() == this.btnRedem)
 		{
@@ -61,8 +81,33 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 			new Controleur();
 		}
 			
-		this.majIHM(true);
 	}
+
+	private Timer animationTimer = new Timer(50, new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			if (PanelDes.this.animationCount < 10)
+			{
+				PanelDes.this.animationCount++;
+				boolean desArretes = true;
+
+				for (int i = 0 ; i < PanelDes.this.tabDes.length ; i++)
+				{
+					if (!PanelDes.this.ctrl.getDe(i).estConserver() && PanelDes.this.ctrl.getNbLancerRestant() > 0)
+					{
+						String image = "./images/de" + ((int)(Math.random() * 6) + 1) + ".png";
+
+						PanelDes.this.tabDes[i].setIcon(new ImageIcon(image));
+
+						desArretes = false;
+					}
+				}
+
+				if (desArretes) ((Timer) e.getSource()).stop();
+			}
+		}
+	});
 	
 	public void mouseClicked(MouseEvent e)
 	{
