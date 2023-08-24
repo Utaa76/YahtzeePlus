@@ -8,5 +8,5 @@ Pour pouvoir tester ce programme vous avez besoin du JDK et du JRE de java dispo
 Pour exécuter le programme veuillez suivre les étapes suivantes :
 - Lancez une console et placez vous dans le répertoire "yahtzee"
 - Exécutez la commande : javac *.java
-- Enfin, exécutez la commande : java Controleur.java
+- Enfin, exécutez la commande : java Controleur
 - Amusez vous !
