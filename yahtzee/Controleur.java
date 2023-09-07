@@ -24,7 +24,7 @@ public class Controleur
 
 	public String getImage(int i)
 	{
-		String sRet = "./images/de" + this.metier.getDe(i).getNumero();
+		String sRet = "/images/de" + this.metier.getDe(i).getNumero();
 		if (this.metier.getDe(i).estConserver()) sRet += "_s";
 
 		return sRet + ".png";

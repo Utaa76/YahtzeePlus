@@ -26,15 +26,23 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 		this.setLayout(new BorderLayout());
 
 		for (int i = 0 ; i < this.tabDes.length ; i++)
-			this.tabDes[i] = new JLabel(new ImageIcon("./images/de_vide.png"));
+			try
+			{
+				this.tabDes[i] = new JLabel(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream("/images/de_vide.png"))));
+			}
+			catch (Exception e) {}
 
 		JPanel panelTmp = new JPanel();
 		panelTmp.setOpaque(false);
 		
 		for (JLabel lbl : tabDes)
 		{
-			lbl.addMouseListener(this);
-			panelTmp.add(lbl);
+			try
+			{
+				lbl.addMouseListener(this);
+				panelTmp.add(lbl);
+			}
+			catch (Exception e) {}
 		}
 
 		this.add(this.btnRedem,  BorderLayout.WEST);
@@ -48,7 +56,11 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 	public void initierDes()
 	{
 		for (int i = 0 ; i < this.tabDes.length ; i++)
-			this.tabDes[i].setIcon(new ImageIcon("./images/de_vide.png"));
+			try
+			{
+				this.tabDes[i].setIcon(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream("/images/de_vide.png"))));
+			}
+			catch (Exception e) {}
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -96,9 +108,12 @@ public class PanelDes extends JPanel implements MouseListener, ActionListener
 				{
 					if (!PanelDes.this.ctrl.getDe(i).estConserver() && PanelDes.this.ctrl.getNbLancerRestant() > 0)
 					{
-						String image = "./images/de" + ((int)(Math.random() * 6) + 1) + ".png";
+						String image = "/images/de" + ((int)(Math.random() * 6) + 1) + ".png";
 
-						PanelDes.this.tabDes[i].setIcon(new ImageIcon(image));
+						try
+						{
+							PanelDes.this.tabDes[i].setIcon(new ImageIcon(ImageIO.read(Controleur.class.getResourceAsStream(image))));
+						} catch (Exception ex) {}
 
 						desArretes = false;
 					}
